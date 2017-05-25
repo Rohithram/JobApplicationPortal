@@ -5,8 +5,8 @@ import {registerEvents} from './posts.events';
 
 var PostsSchema = new mongoose.Schema({
   name: String,
-  info: String,
-  active: Boolean
+  State:String,
+  limitnumber:String
 });
 
 registerEvents(PostsSchema);
