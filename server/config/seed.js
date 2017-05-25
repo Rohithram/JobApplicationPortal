@@ -4,15 +4,15 @@
  */
 
 'use strict';
-import post from '../api/posts/posts.model';
+import posts from '../api/posts/posts.model';
 import User from '../api/user/user.model';
 import config from './environment/';
 
 export default function seedDatabaseIfNeeded() {
   if(config.seedDB) {
-    post.find({}).remove()
+    posts.find({}).remove()
       .then(() => {
-        let post = post.create({
+        posts.create({
           name:'Clerk post',
           State:'open',
           limitnumber:'5'
@@ -37,7 +37,7 @@ export default function seedDatabaseIfNeeded() {
           State:'open',
           limitnumber:'2'
         });
-        return post;
+        return posts;
       })
     .then(() => console.log('finished populating posts'))
     .catch(err => console.log('error populating posts', err));
