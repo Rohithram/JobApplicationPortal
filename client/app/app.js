@@ -22,6 +22,8 @@ import admin from './admin';
 import navbar from '../components/navbar/navbar.component';
 import footer from '../components/footer/footer.component';
 import main from './main/main.component';
+import PostsComponent from './posts/posts.component';
+
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
@@ -29,7 +31,7 @@ import socket from '../components/socket/socket.service';
 import './app.scss';
 
 angular.module('jobappportalApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
-  uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, main, constants,
+  uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer,PostsComponent, main, constants,
   socket, util
 ])
   .config(routeConfig)
