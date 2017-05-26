@@ -5,40 +5,44 @@ import routing from './main.routes';
 export class MainController {
   $http;
   socket;
-  awesomeThings = [];
-  newThing = '';
+  avaposts = [];
+  newpost = [];
+  isLoggedIn: Function;
+
+
 
   /*@ngInject*/
-  constructor($http, $scope, socket) {
+  constructor($http, $scope, socket,Auth) {
     this.$http = $http;
     this.socket = socket;
+    this.$scope = $scope;
+    this.isLoggedIn = Auth.isLoggedInSync;
 
     $scope.$on('$destroy', function() {
-      socket.unsyncUpdates('thing');
+      socket.unsyncUpdates('posts');
     });
   }
-
   $onInit() {
-    this.$http.get('/api/things')
+    this.$http.get('/api/posts')
       .then(response => {
-        this.awesomeThings = response.data;
-        this.socket.syncUpdates('thing', this.awesomeThings);
+        this.avaposts= response.data;
+        this.socket.syncUpdates('posts', this.avaposts);
       });
   }
 
-  addThing() {
-    if(this.newThing) {
-      this.$http.post('/api/things', {
-        name: this.newThing
+  applyPost() {
+    if(this.newpost) {
+      this.$http.post('/api/posts', {
+        name: this.newpost.name,
+        State:this.newpost.State,
+        limitnumber:this.newpost.limitnumber
       });
-      this.newThing = '';
+      this.newpost ={};
     }
   }
-
-  deleteThing(thing) {
-    this.$http.delete(`/api/things/${thing._id}`);
-  }
 }
+  
+
 
 export default angular.module('jobappportalApp.main', [uiRouter])
   .config(routing)

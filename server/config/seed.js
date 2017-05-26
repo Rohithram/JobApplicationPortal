@@ -5,7 +5,6 @@
 
 'use strict';
 import posts from '../api/posts/posts.model';
-import admins from '../api/admin/admin.model';
 import User from '../api/user/user.model';
 import config from './environment/';
 
@@ -44,38 +43,7 @@ export default function seedDatabaseIfNeeded() {
     .catch(err => console.log('error populating posts', err));
 
 
-    admins.find({}).remove()
-    .then(() => {
-        admins.create({
-          name:'Clerk post',
-          State:'open',
-          limitnumber:'5'
-        }, {
-          name: 'Manager post',
-          State:'open',
-          limitnumber:'3'
-        }, {
-          name: 'Director post',
-          State:'open',
-          limitnumber:'2'
-        }, {
-          name: 'Senior Manager post',
-          State:'open',
-          limitnumber:'3'
-        }, {
-          name: 'Deputy Manager post',
-          State:'open',
-          limitnumber:'3'
-        }, {
-          name: 'Sales Manager',
-          State:'open',
-          limitnumber:'2'
-        });
-        return admins;
-      })
-    .then(() => console.log('finished populating admins'))
-    .catch(err => console.log('error populating admins', err));
-
+    
 
     User.find({}).remove()
       .then(() => {

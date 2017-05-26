@@ -6,6 +6,6 @@ export default function($stateProvider) {
     .state('posts', {
       url: '/posts',
       template: '<posts></posts>',
-      authenticate:'user'
+      authenticate:'admin'
   })
 }

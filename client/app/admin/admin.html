@@ -9,47 +9,6 @@
         <a ng-click="admin.delete(user)" class="trash"><span class="fa fa-trash fa-2x"></span></a>
     </li>
   </ul>
-  
+
 </div>
 
-<div ng-include="components/navbar/navbar.html"></div>
-<div class="col-md-12">
-  <h1>Lists of Posts</h1>
-  <table class="table table-striped">
-    <thead>
-      <th>PostName</th>
-      <th>State of the Post</th>
-      <th>Limitnumber</th>
-    </thead>
-    <tbody>
-      <tr ng-repeat="post in $ctrl.avaposts">
-        <td ng-hide="post.edit">{{post.name}}</td>
-        <td ng-show="post.edit"><input type="text" ng-model="$ctrl.post.name"></td>
- 
-        <td ng-hide="post.edit">{{post.State}}</td>
-        <td ng-show="post.edit"><input type="text" ng-model="$ctrl.post.State"></td>
- 
-        <td ng-hide="post.edit">{{post.limitnumber}}</td>
-        <td ng-show="post.edit"><input type="text" ng-model="$ctrl.post.limitnumber"></td>
- 
-        <td ng-hide="post.edit">
-          <button class="btn btn-success" ng-click="$ctrl.toggleEdit(post)">Edit</button>
-          <button class="btn btn-danger" ng-click="$ctrl.deletePost(post)">Delete</button>
-        </td>
-        <td ng-show="post.edit">
-          <button class="btn btn-primary" ng-click="$ctrl.savePost(post)">Save</button>
-          <button class="btn btn-danger" ng-click="$ctrl.toggleEdit(post)">Cancel</button>
-        </td>
-      </tr>
-    </tbody>
-      <tr>
-      <td><input type="text" ng-model="$ctrl.newpost.name"></td>
-      <td><input type="text" ng-model="$ctrl.newpost.State"></td>
-      <td><input type="text" ng-model="$ctrl.newpost.limitnumber"></td>
-      <td>
-        <button class="btn btn-primary" ng-click="$ctrl.addPost()">Add New</button>
-      </td>
-    </tr>
-    
-  </table>
-</div>
