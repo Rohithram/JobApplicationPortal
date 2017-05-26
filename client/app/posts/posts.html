@@ -10,11 +10,25 @@
     </thead>
     <tbody>
       <tr ng-repeat="post in $ctrl.avaposts">
-        <td>{{post.name}}</td>
-        <td>{{post.State}}</td>
-        <td>{{post.limitnumber}}</td>
-        <td>          <button class="btn btn-danger" ng-click="$ctrl.deletePost(post)">Delete</button></td>
+        <td ng-hide="post.edit">{{post.name}}</td>
+        <td ng-show="post.edit"><input type="text" ng-model="$ctrl.post.name"></td>
+ 
+        <td ng-hide="post.edit">{{post.State}}</td>
+        <td ng-show="post.edit"><input type="text" ng-model="$ctrl.post.State"></td>
+ 
+        <td ng-hide="post.edit">{{post.limitnumber}}</td>
+        <td ng-show="post.edit"><input type="text" ng-model="$ctrl.post.limitnumber"></td>
+ 
+        <td ng-hide="post.edit">
+          <button class="btn btn-success" ng-click="$ctrl.toggleEdit(post)">Edit</button>
+          <button class="btn btn-danger" ng-click="$ctrl.deletePost(post)">Delete</button>
+        </td>
+        <td ng-show="post.edit">
+          <button class="btn btn-primary" ng-click="$ctrl.savePost(post)">Save</button>
+          <button class="btn btn-danger" ng-click="$ctrl.toggleEdit(post)">Cancel</button>
+        </td>
       </tr>
+    </tbody>
       <tr>
       <td><input type="text" ng-model="$ctrl.newpost.name"></td>
       <td><input type="text" ng-model="$ctrl.newpost.State"></td>
@@ -23,6 +37,6 @@
         <button class="btn btn-primary" ng-click="$ctrl.addPost()">Add New</button>
       </td>
     </tr>
-    </tbody>
+    
   </table>
 </div>

@@ -5,7 +5,7 @@ export default function routes($stateProvider) {
 
   $stateProvider.state('admin', {
     url: '/admin',
-    template: require('./admin.html'),
+    template:'<admin></admin>',
     controller: 'AdminController',
     controllerAs: 'admin',
     authenticate: 'admin'

@@ -45,7 +45,20 @@ export class PostsComponent{
   deletePost(posts) {
     this.$http.delete(`/api/posts/${posts._id}`);
   }
-}
+
+  toggleEdit(posts){
+
+        posts.edit = !posts.edit;
+   };     
+
+
+  savePost(posts){
+        this.$http.put(`/api/posts/${posts._id}`,$posts,{
+
+
+        });
+                  }}
+
 
 
 export default angular.module('jobappportalApp.posts', [uiRouter])
@@ -53,5 +66,5 @@ export default angular.module('jobappportalApp.posts', [uiRouter])
   .component('posts', {
     template: require('./posts.html'),
     controller: PostsComponent,
-  })
+ })
   .name;
