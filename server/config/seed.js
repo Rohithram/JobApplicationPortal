@@ -5,6 +5,7 @@
 
 'use strict';
 import posts from '../api/posts/posts.model';
+import postsapps from '../api/postsapp/postsapp.model';
 import User from '../api/user/user.model';
 import config from './environment/';
 
@@ -18,12 +19,12 @@ export default function seedDatabaseIfNeeded() {
           limitnumber:'5'
         }, {
           name: 'Manager post',
-          State:'open',
-          limitnumber:'3'
+          State:'closed',
+          limitnumber:'0'
         }, {
           name: 'Director post',
-          State:'open',
-          limitnumber:'2'
+          State:'closed',
+          limitnumber:'0'
         }, {
           name: 'Senior Manager post',
           State:'open',
@@ -43,7 +44,13 @@ export default function seedDatabaseIfNeeded() {
     .catch(err => console.log('error populating posts', err));
 
 
-    
+   postsapps.find({}).remove()
+        .then(()=>{
+          return postsapps;
+        })
+        .then(() => console.log('finished populating postsapps'))
+        .catch(err => console.log('error populating postsapps', err));
+
 
     User.find({}).remove()
       .then(() => {

@@ -1,0 +1,16 @@
+<div class="col-md-12">
+  <h1>Applicants Portal</h1>
+  <h1 class="page-header"  >List of Posts Applied </h1>
+  <table class="table table-striped" >
+    <thead>
+      <th>PostApplied</th>
+      <th>Status of Application</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="post in $ctrl.appliedposts" >
+        <td >{{post.postname}}</td>
+       	<td >{{post.status}}</td>
+       </tr>
+     </tbody>
+  </table>
+ </div>

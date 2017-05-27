@@ -2,23 +2,26 @@
 <div ng-include="components/navbar/navbar.html"></div>
 <div class="col-md-12">
   <h1>Hiring Manager's Portal</h1>
-  <h2>Lists of Posts</h2>
-  <table class="table table-striped">
+  <h2 ng-hide="!show">Lists of Posts</h2>
+  <h1 class="page-header"  ng-show="!show" >Details of posts</h1>
+  <table class="table table-striped" ng-hide="show">
     <thead>
       <th>PostName</th>
       <th>State of the Post</th>
       <th>Limitnumber</th>
     </thead>
     <tbody>
-      <tr ng-repeat="post in $ctrl.avaposts">
-        <td ng-hide="post.edit"><a href="#">{{post.name}}</a></td>
+      <tr ng-repeat="post in $ctrl.avaposts" >
+        <td ng-hide="post.edit"  ><button  ng-click="show=!show">{{post.name}}</button></td>
         <td ng-show="post.edit"><input type="text" ng-model="$ctrl.post.name"></td>
- 
-        <td ng-hide="post.edit">{{post.State}}</td>
+        
+       <td ng-hide="post.edit">{{post.State}}</td>
         <td ng-show="post.edit"><input type="text" ng-model="$ctrl.post.State"></td>
+
  
         <td ng-hide="post.edit">{{post.limitnumber}}</td>
         <td ng-show="post.edit"><input type="text" ng-model="$ctrl.post.limitnumber"></td>
+
  
         <td ng-hide="post.edit">
           <button class="btn btn-success" ng-click="$ctrl.toggleEdit(post)">Edit</button>
@@ -26,10 +29,11 @@
         </td>
         
         <td ng-show="post.edit">
-          <button class="btn btn-primary" ng-click="$ctrl.savePost(post)">Save</button>
+          <button class="btn btn-primary" ng-click="$ctrl.savePost(post)" ng-click="post.edit='false'">Save</button>
           <button class="btn btn-danger" ng-click="$ctrl.toggleEdit(post)">Cancel</button>
         </td>
       </tr>
+      
     </tbody>
       <tr>
       <td><input type="text" ng-model="$ctrl.newpost.name"></td>
@@ -41,4 +45,23 @@
     </tr>
     
   </table>
+  
+      <table class="table table-striped" ng-show="show">
+        <thead>
+          <th>PostName</th>
+          <th>Applicants applied</th>
+       </thead>
+    <tbody>
+      <tr id ="row" style="color:{{post.limitnumber<1?'red':'black'}}"ng-repeat="post in $ctrl.avaposts" >
+      
+        <td>{{post.name}}</td>
+        <td>{{post.userid}}</td>
+        
+        <td><button class="btn btn-success" id = "button"  >Approve</button></td>
+        <td><button class="btn btn-danger" id = "button"  >Reject</button></td>
+      </tr>
+
+    </tbody>
+  </table>
+  
 </div>

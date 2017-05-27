@@ -12,12 +12,16 @@ export class PostsComponent{
   socket;
   avaposts = [];
   newpost = [];
+    getCurrentUser: Function;
 
-  /*@ngInject*/
-  constructor($http, $scope, socket) {
+
+  constructor($http, $scope, socket,Auth) {
+        'ngInject';
+
     this.$http = $http;
     this.socket = socket;
     this.$scope = $scope;
+    this.getCurrentUser = Auth.getCurrentUserSync;
 
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('posts');
@@ -46,6 +50,10 @@ export class PostsComponent{
     this.$http.delete(`/api/posts/${posts._id}`);
   }
 
+  toggleShow(posts){
+    posts.show = !posts.show;
+  };
+  
   toggleEdit(posts){
 
         posts.edit = !posts.edit;
@@ -54,6 +62,7 @@ export class PostsComponent{
 
   savePost(posts){
         this.$http.put(`/api/posts/${posts._id}`,$posts,{
+          edit:false
 
 
         });

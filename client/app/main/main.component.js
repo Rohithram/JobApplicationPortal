@@ -6,17 +6,21 @@ export class MainController {
   $http;
   socket;
   avaposts = [];
-  newpost = [];
   isLoggedIn: Function;
+  getCurrentUser: Function;
 
 
 
-  /*@ngInject*/
+
   constructor($http, $scope, socket,Auth) {
+        'ngInject';
+
     this.$http = $http;
     this.socket = socket;
     this.$scope = $scope;
     this.isLoggedIn = Auth.isLoggedInSync;
+    this.getCurrentUser = Auth.getCurrentUserSync;
+
 
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('posts');
@@ -29,18 +33,17 @@ export class MainController {
         this.socket.syncUpdates('posts', this.avaposts);
       });
   }
+applyPost(posts){
+      this.$http.post('/api/postsapps', {
+        postname:posts.name,
+        userid:(this.getCurrentUser()._id),
+        username:(this.getCurrentUser().name),
+        status:""
 
-  applyPost() {
-    if(this.newpost) {
-      this.$http.post('/api/posts', {
-        name: this.newpost.name,
-        State:this.newpost.State,
-        limitnumber:this.newpost.limitnumber
       });
-      this.newpost ={};
     }
   }
-}
+
   
 
 

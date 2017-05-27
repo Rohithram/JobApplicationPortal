@@ -22,6 +22,7 @@ import admin from './admin';
 import navbar from '../components/navbar/navbar.component';
 import footer from '../components/footer/footer.component';
 import main from './main/main.component';
+import CustomerpageComponent from './customerpage/customerpage.component';
 
 import PostsComponent from './posts/posts.component';
 
@@ -32,7 +33,7 @@ import socket from '../components/socket/socket.service';
 import './app.scss';
 
 angular.module('jobappportalApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
-  uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer,PostsComponent, main, constants,
+  uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer,PostsComponent,CustomerpageComponent, main, constants,
   socket, util
 ])
   .config(routeConfig)

@@ -16,6 +16,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/postsapp/postsapp.socket').register(socket);
   require('../api/posts/posts.socket').register(socket);
 }
 

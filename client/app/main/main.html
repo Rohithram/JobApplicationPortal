@@ -1,4 +1,5 @@
 <header class="hero-unit" id="banner">
+  
   <div class="container">
     <h1>Hey!</h1>
     <p class="lead">Welcome to JobApplication Portal</p><br>
@@ -18,12 +19,15 @@
           <th>Limitnumber</th>
        </thead>
     <tbody>
-      <tr ng-repeat="post in $ctrl.avaposts">
+      <tr id ="row" style="color:{{post.limitnumber<1?'red':'black'}}" post.State="{{post.limitnumber<1?'closed':'open'}}" ng-repeat="post in $ctrl.avaposts" >
+      
         <td>{{post.name}}</td>
         <td>{{post.State}}</td>
         <td>{{post.limitnumber}}</td>
-        <td><button class="btn btn-success" ng-show="$ctrl.isLoggedIn()" ng-click="$ctrl.applyPost(post)">Apply</button></td>
+        
+        <td><button class="btn btn-success" id = "button" data-ng-disabled="post.limitnumber<1" ng-show="$ctrl.isLoggedIn()" ng-click="$ctrl.applyPost(post)">Apply</button></td>
       </tr>
+
     </tbody>
   </table>
     </div>
