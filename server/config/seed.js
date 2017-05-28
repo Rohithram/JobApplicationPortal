@@ -16,27 +16,27 @@ export default function seedDatabaseIfNeeded() {
         posts.create({
           name:'Clerk post',
           State:'open',
-          limitnumber:'5'
+          limitnumber:5
         }, {
           name: 'Manager post',
           State:'closed',
-          limitnumber:'0'
+          limitnumber:0
         }, {
           name: 'Director post',
           State:'closed',
-          limitnumber:'0'
+          limitnumber:0
         }, {
           name: 'Senior Manager post',
           State:'open',
-          limitnumber:'3'
+          limitnumber:3
         }, {
           name: 'Deputy Manager post',
           State:'open',
-          limitnumber:'3'
+          limitnumber:3
         }, {
           name: 'Sales Manager',
           State:'open',
-          limitnumber:'2'
+          limitnumber:2
         });
         return posts;
       })

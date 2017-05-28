@@ -1,9 +1,9 @@
 <header class="hero-unit" id="banner">
   
   <div class="container">
-    <h1>Hey!</h1>
+    <h1>Hey!,Want to get a Job!,you're at the right place!!!</h1>
     <p class="lead">Welcome to JobApplication Portal</p><br>
-    <p class = "lead">Please Log in to apply for any posts</p>
+    <h3>Please Log in to apply for any posts</h3>
     <img src="assets/images/yeoman.png" alt="I'm Yeoman">
   </div>
 </header>
@@ -11,12 +11,12 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header"  >List of Posts</h1>
+      <h1 class="page-header">List of Posts</h1>
       <table class="table table-striped" >
         <thead>
           <th>PostName</th>
           <th>State of the Post</th>
-          <th>Limitnumber</th>
+          <th>Maximum Applications</th>
        </thead>
     <tbody>
       <tr id ="row" style="color:{{post.limitnumber<1?'red':'black'}}" post.State="{{post.limitnumber<1?'closed':'open'}}" ng-repeat="post in $ctrl.avaposts" >
@@ -25,7 +25,7 @@
         <td>{{post.State}}</td>
         <td>{{post.limitnumber}}</td>
         
-        <td><button class="btn btn-success" id = "button" data-ng-disabled="post.limitnumber<1" ng-show="$ctrl.isLoggedIn()" ng-click="$ctrl.applyPost(post)">Apply</button></td>
+        <td><button class="btn btn-success" id = "button" data-ng-disabled="(post.limitnumber<1)" ng-show="$ctrl.isLoggedIn() && !$ctrl.isAdmin()" ng-click="$ctrl.applyPost(post)">Apply</button></td>
       </tr>
 
     </tbody>

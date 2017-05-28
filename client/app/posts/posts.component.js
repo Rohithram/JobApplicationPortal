@@ -11,7 +11,9 @@ export class PostsComponent{
   $http;
   socket;
   avaposts = [];
+  avaposts1=[];
   newpost = [];
+  appliedusers=[];
     getCurrentUser: Function;
 
 
@@ -27,6 +29,15 @@ export class PostsComponent{
       socket.unsyncUpdates('posts');
     });
   }
+
+  reset(){
+    this.$http.get('/api/posts')
+      .then(response => {
+        this.avaposts = response.data;
+        this.socket.syncUpdates('posts', this.avaposts);
+      });
+    }
+
   $onInit() {
     this.$http.get('/api/posts')
       .then(response => {
@@ -50,25 +61,54 @@ export class PostsComponent{
     this.$http.delete(`/api/posts/${posts._id}`);
   }
 
-  toggleShow(posts){
-    posts.show = !posts.show;
+  toggle(posts){
+    clicked=!clicked;
   };
   
   toggleEdit(posts){
-
         posts.edit = !posts.edit;
    };     
 
 
   savePost(posts){
-        this.$http.put(`/api/posts/${posts._id}`,$posts,{
-          edit:false
+        this.$http.put(`/api/posts/${posts._id}`,{
+              name:posts.name,
+              State:posts.State,
+              limitnumber:posts.limitnumber
+          }).then((response)=>{this.reset(); });
+ }
 
 
-        });
-                  }}
+getusers(posts){
+  this.$http.get(`/api/postsapps/posts/${posts._id}`)
+      .then(response =>{
+        this.appliedusers=response.data;
+        this.socket.syncUpdates('postsapps', this.appliedusers);
+      });
 
+}
 
+approve(user){
+  this.$http.put(`/api/postsapps/user/${user.userid}/${user.postid}`,{
+    status:"Selected,Congratulations!"
+  })
+  this.$http.get(`/api/posts/${user.postid}`)
+    .then(response =>{
+        this.avaposts1=response.data;
+        this.socket.syncUpdates('posts', this.avaposts1);
+      });
+     
+ this.$http.put(`/api/posts/${user.postid}`,{
+      limitnumber:this.avaposts1.limitnumber-1
+    })
+
+}
+reject(user){
+  this.$http.put(`/api/postsapps/user/${user.userid}/${user.postid}`,{
+    status:"Rejected,Better Luck next time"
+  })
+}
+}
 
 export default angular.module('jobappportalApp.posts', [uiRouter])
   .config(routes)

@@ -80,6 +80,15 @@ export function show(req, res) {
     .catch(handleError(res));
 }
 
+// Gets a users cooresponding to particular post_id from the DB
+export function showuser(req, res) {
+  var postId = req.params.id;
+  return Postsapp.find({postid:postId}).exec()
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
 // Creates a new Postsapp in the DB
 export function create(req, res) {
   return Postsapp.create(req.body)
@@ -93,6 +102,16 @@ export function upsert(req, res) {
     Reflect.deleteProperty(req.body, '_id');
   }
   return Postsapp.findOneAndUpdate({_id: req.params.id}, req.body, {new: true, upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
+
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+// inserts status in  the given Postsappuser in the DB at the specified ID
+export function insertstatus(req, res) {
+  if(req.body._id) {
+    Reflect.deleteProperty(req.body, '_id');
+  }
+  return Postsapp.findOneAndUpdate({userid: req.params.userId,postid:req.params.postId}, req.body, {new: true, upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
 
     .then(respondWithResult(res))
     .catch(handleError(res));

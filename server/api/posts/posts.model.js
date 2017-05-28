@@ -4,9 +4,9 @@ import mongoose from 'mongoose';
 import {registerEvents} from './posts.events';
 
 var PostsSchema = new mongoose.Schema({
-  name: String,
-  State:String,
-  limitnumber:String
+  name: {type:String,required:true},
+  State:{type:String , default:'open'},
+  limitnumber:{type:Number , required:true}
 });
 
 registerEvents(PostsSchema);

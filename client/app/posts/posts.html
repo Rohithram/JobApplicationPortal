@@ -1,18 +1,17 @@
 
 <div ng-include="components/navbar/navbar.html"></div>
-<div class="col-md-12">
+<div class="col-md-12" >
   <h1>Hiring Manager's Portal</h1>
-  <h2 ng-hide="!show">Lists of Posts</h2>
-  <h1 class="page-header"  ng-show="!show" >Details of posts</h1>
-  <table class="table table-striped" ng-hide="show">
+  <h2 >Lists of Posts</h2>
+  <table class="table table-striped" >
     <thead>
       <th>PostName</th>
       <th>State of the Post</th>
-      <th>Limitnumber</th>
+      <th>Maximum Applicants</th>
     </thead>
     <tbody>
-      <tr ng-repeat="post in $ctrl.avaposts" >
-        <td ng-hide="post.edit"  ><button  ng-click="show=!show">{{post.name}}</button></td>
+      <tr ng-repeat="post in $ctrl.avaposts" ng-hide="clicked">
+        <td ng-hide="post.edit"> <button class="btn btn-primary" ng-click="$ctrl.getusers(post)">{{post.name}}</button></td>
         <td ng-show="post.edit"><input type="text" ng-model="$ctrl.post.name"></td>
         
        <td ng-hide="post.edit">{{post.State}}</td>
@@ -29,10 +28,16 @@
         </td>
         
         <td ng-show="post.edit">
-          <button class="btn btn-primary" ng-click="$ctrl.savePost(post)" ng-click="post.edit='false'">Save</button>
+          <button class="btn btn-primary" ng-click="$ctrl.savePost(post)">Save</button>
           <button class="btn btn-danger" ng-click="$ctrl.toggleEdit(post)">Cancel</button>
         </td>
       </tr>
+      <tr ng-repeat="user in $ctrl.appliedusers" ng-show="!clicked" >
+          <td>{{user.postname}}</td>
+          <td>{{user.username}}</td>
+          <td><button class="btn btn-success" ng-click="$ctrl.approve(user)">Approve</button></td>
+          <td><button class="btn btn-danger" ng-click="$ctrl.reject(user)" >Reject</button></td>
+        </tr>
       
     </tbody>
       <tr>
@@ -43,25 +48,19 @@
         <button class="btn btn-primary" ng-click="$ctrl.addPost()">Add New</button>
       </td>
     </tr>
-    
-  </table>
-  
-      <table class="table table-striped" ng-show="show">
-        <thead>
-          <th>PostName</th>
-          <th>Applicants applied</th>
-       </thead>
-    <tbody>
-      <tr id ="row" style="color:{{post.limitnumber<1?'red':'black'}}"ng-repeat="post in $ctrl.avaposts" >
-      
-        <td>{{post.name}}</td>
-        <td>{{post.userid}}</td>
-        
-        <td><button class="btn btn-success" id = "button"  >Approve</button></td>
-        <td><button class="btn btn-danger" id = "button"  >Reject</button></td>
-      </tr>
-
-    </tbody>
-  </table>
-  
+</table>
+</div>
+<div ng-show="!clicked"   class="col-md-12">
+  <h1>Hiring Manager's Portal</h1>
+  <h2 >Details of Posts</h2>
+  <table class="table table-striped" >
+    <thead>
+      <th>PostName</th>
+      <th>Applicant Name</th>
+      <th>Action</th>
+    </thead>
+       <tbody>
+       
+      </tbody>
+    </table>
 </div>

@@ -6,8 +6,11 @@ export class MainController {
   $http;
   socket;
   avaposts = [];
+  isapply = [];
   isLoggedIn: Function;
   getCurrentUser: Function;
+  isAdmin: Function;
+
 
 
 
@@ -20,6 +23,7 @@ export class MainController {
     this.$scope = $scope;
     this.isLoggedIn = Auth.isLoggedInSync;
     this.getCurrentUser = Auth.getCurrentUserSync;
+    this.isAdmin = Auth.isAdminSync;
 
 
     $scope.$on('$destroy', function() {
@@ -35,15 +39,14 @@ export class MainController {
   }
 applyPost(posts){
       this.$http.post('/api/postsapps', {
+        postid:posts._id,
         postname:posts.name,
         userid:(this.getCurrentUser()._id),
-        username:(this.getCurrentUser().name),
-        status:""
-
-      });
+        username:(this.getCurrentUser().name)
+    });
     }
-  }
-
+  
+}
   
 
 
