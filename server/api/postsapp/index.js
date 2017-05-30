@@ -8,6 +8,7 @@ var router = express.Router();
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.get('/posts/:id',controller.showuser);
+router.get('/posts/:postId/:userId',controller.showapplied);
 router.post('/', controller.create);
 router.put('/:id', controller.upsert);
 router.put('/user/:userId/:postId',controller.insertstatus);

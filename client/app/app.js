@@ -33,7 +33,7 @@ import socket from '../components/socket/socket.service';
 import './app.scss';
 
 angular.module('jobappportalApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
-  uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer,PostsComponent,CustomerpageComponent, main, constants,
+  uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer,PostsComponent,CustomerpageComponent,main, constants,
   socket, util
 ])
   .config(routeConfig)

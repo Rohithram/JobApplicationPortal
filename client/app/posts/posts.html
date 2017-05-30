@@ -5,21 +5,24 @@
   <h2 >Lists of Posts</h2>
   <table class="table table-striped" >
     <thead>
+      <th style="width:10px">#</th>
       <th>PostName</th>
       <th>State of the Post</th>
       <th>Maximum Applicants</th>
     </thead>
     <tbody>
-      <tr ng-repeat="post in $ctrl.avaposts" ng-hide="clicked">
+      <tr  style="color:{{post.limitnumber<1?'red':'black'}}" ng-repeat="post in $ctrl.avaposts track by $index" >
+        <td>{{$index+1}}</td>
+        
         <td ng-hide="post.edit"> <button class="btn btn-primary" ng-click="$ctrl.getusers(post)">{{post.name}}</button></td>
-        <td ng-show="post.edit"><input type="text" ng-model="$ctrl.post.name"></td>
+        <td ng-show="post.edit"><input type="text" ng-model="post.name"></td>
         
        <td ng-hide="post.edit">{{post.State}}</td>
-        <td ng-show="post.edit"><input type="text" ng-model="$ctrl.post.State"></td>
+        <td ng-show="post.edit"><input type="text" ng-model="post.State"></td>
 
  
-        <td ng-hide="post.edit">{{post.limitnumber}}</td>
-        <td ng-show="post.edit"><input type="text" ng-model="$ctrl.post.limitnumber"></td>
+        <td ng-hide="post.edit"  >{{post.limitnumber}}</td>
+        <td ng-show="post.edit" ><input type="text" ng-model="post.limitnumber"></td>
 
  
         <td ng-hide="post.edit">
@@ -32,12 +35,7 @@
           <button class="btn btn-danger" ng-click="$ctrl.toggleEdit(post)">Cancel</button>
         </td>
       </tr>
-      <tr ng-repeat="user in $ctrl.appliedusers" ng-show="!clicked" >
-          <td>{{user.postname}}</td>
-          <td>{{user.username}}</td>
-          <td><button class="btn btn-success" ng-click="$ctrl.approve(user)">Approve</button></td>
-          <td><button class="btn btn-danger" ng-click="$ctrl.reject(user)" >Reject</button></td>
-        </tr>
+      
       
     </tbody>
       <tr>
@@ -50,17 +48,27 @@
     </tr>
 </table>
 </div>
-<div ng-show="!clicked"   class="col-md-12">
-  <h1>Hiring Manager's Portal</h1>
+<div class="col-md-12">
   <h2 >Details of Posts</h2>
   <table class="table table-striped" >
     <thead>
+      <th>#</th>
       <th>PostName</th>
       <th>Applicant Name</th>
-      <th>Action</th>
+      <th style="width:60px">Action</th>
+      <th></th>
+      <th>Status of the applicant</th>
     </thead>
        <tbody>
-       
+        <tr ng-repeat="user in $ctrl.appliedusers track by $index" >
+          <td>{{$index+1}}</td>
+          <td>{{user.postname}}</td>
+          <td>{{user.username}}</td>
+          <td ><button data-ng-disabled="user.approve || $ctrl.statusof(user) " class="btn btn-success" ng-click="$ctrl.approve(user)">Approve</button></td>
+          <td ><button data-ng-disabled="user.approve || $ctrl.statusof(user)" class="btn btn-danger" ng-click="$ctrl.reject(user)" >Reject</button></td>
+          <td><button class="btn btn-primary">{{user.status}}</button></td>
+
+       </tr>
       </tbody>
     </table>
 </div>

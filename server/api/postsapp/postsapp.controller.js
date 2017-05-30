@@ -57,6 +57,29 @@ function handleEntityNotFound(res) {
   };
 }
 
+function handleEntityFound(res) {
+  return function(entity) {
+    if(entity) {
+      res.status(208).end();
+      return null;
+    }
+    return entity;
+  };
+}
+
+function handleEntityCreate(req,res) {
+  return function(entity) {
+    if(entity.length<1) {
+        return Postsapp.create(req.body)
+          .then(()=> {
+            res.status(207).end();
+            return null;
+          });
+    }
+    return entity;
+  };
+}
+
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
@@ -89,9 +112,21 @@ export function showuser(req, res) {
     .catch(handleError(res));
 }
 
+// Gets a applied cooresponding to particular post_id and user_id from the DB
+export function showapplied(req, res) {
+  var postId1 = req.params.postId;
+  var userId1 = req.params.userId;
+  return Postsapp.find({postid:postId1,userid:userId1}).exec()
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
 // Creates a new Postsapp in the DB
 export function create(req, res) {
-  return Postsapp.create(req.body)
+  return Postsapp.find({userid:req.body.userid,postid:req.body.postid})
+    .then(handleEntityCreate(req,res))
+    .then(handleEntityFound(res))
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }

@@ -8,7 +8,9 @@ var PostsappSchema = new mongoose.Schema({
   	postname: String,
  	userid:String,
   	username:String,
-  	status:{type:String,default:'waiting for approval'}
+  	status:{type:String,default:'waiting for approval'},
+  	approve:{type:Boolean,default:false},
+  	applied:{type:Boolean,default:false}
 });
 
 registerEvents(PostsappSchema);

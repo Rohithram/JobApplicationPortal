@@ -14,7 +14,7 @@ export class PostsComponent{
   avaposts1=[];
   newpost = [];
   appliedusers=[];
-    getCurrentUser: Function;
+  getCurrentUser: Function;
 
 
   constructor($http, $scope, socket,Auth) {
@@ -24,7 +24,6 @@ export class PostsComponent{
     this.socket = socket;
     this.$scope = $scope;
     this.getCurrentUser = Auth.getCurrentUserSync;
-
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('posts');
     });
@@ -44,6 +43,7 @@ export class PostsComponent{
         this.avaposts= response.data;
         this.socket.syncUpdates('posts', this.avaposts);
       });
+      
   }
 
   addPost() {
@@ -90,26 +90,45 @@ getusers(posts){
 
 approve(user){
   this.$http.put(`/api/postsapps/user/${user.userid}/${user.postid}`,{
-    status:"Selected,Congratulations!"
+    status:"Selected,Congratulations!",
+    approve:true
   })
   this.$http.get(`/api/posts/${user.postid}`)
     .then(response =>{
         this.avaposts1=response.data;
         this.socket.syncUpdates('posts', this.avaposts1);
-      });
-     
- this.$http.put(`/api/posts/${user.postid}`,{
-      limitnumber:this.avaposts1.limitnumber-1
-    })
+        if(this.avaposts1.limitnumber==1){
+            this.$http.put(`/api/posts/${user.postid}`,{
+            limitnumber:this.avaposts1.limitnumber-1,
+            State:"closed"
+            });
+          }
+        else
+            {
+              this.$http.put(`/api/posts/${user.postid}`,{
+              limitnumber:this.avaposts1.limitnumber-1,
+              });
 
+            }  
+
+        
+       })
 }
+
 reject(user){
   this.$http.put(`/api/postsapps/user/${user.userid}/${user.postid}`,{
-    status:"Rejected,Better Luck next time"
+    status:"Rejected,Better Luck next time",
+    approve:false
   })
 }
-}
 
+statusof(user){
+  if(user.status==="Rejected,Better Luck next time")
+    return true;
+  else 
+    return false;
+}
+}
 export default angular.module('jobappportalApp.posts', [uiRouter])
   .config(routes)
   .component('posts', {

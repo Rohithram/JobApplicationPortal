@@ -6,7 +6,6 @@ export class MainController {
   $http;
   socket;
   avaposts = [];
-  isapply = [];
   isLoggedIn: Function;
   getCurrentUser: Function;
   isAdmin: Function;
@@ -25,7 +24,6 @@ export class MainController {
     this.getCurrentUser = Auth.getCurrentUserSync;
     this.isAdmin = Auth.isAdminSync;
 
-
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('posts');
     });
@@ -36,15 +34,17 @@ export class MainController {
         this.avaposts= response.data;
         this.socket.syncUpdates('posts', this.avaposts);
       });
+
   }
 applyPost(posts){
       this.$http.post('/api/postsapps', {
         postid:posts._id,
         postname:posts.name,
         userid:(this.getCurrentUser()._id),
-        username:(this.getCurrentUser().name)
+        username:(this.getCurrentUser().name),
     });
-    }
+     }
+
   
 }
   
