@@ -1,6 +1,14 @@
 # jobappportal
 
 This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 4.2.0.
+##About the app:
+This is Job Application portal webapp which is used to apply for jobs.
+To apply for any app the user need to login or register themselves otherwise they can only look at the posts that are there.
+Once logged in you will be able to see apply button and you can apply for any number of posts!
+Even if you apply for the same post many times it will be taken only once in the server.
+You can see the list of posts applied by you in customer page.which is shown in the main tab only when you are logged in.
+You can see status of your application there.
+
 
 ## Getting Started
 
@@ -26,3 +34,4 @@ Run `gulp build` for building and `gulp serve` for preview.
 ## Testing
 
 Running `npm test` will run the unit tests with karma.
+
