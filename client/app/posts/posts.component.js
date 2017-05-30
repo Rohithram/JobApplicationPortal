@@ -61,9 +61,7 @@ export class PostsComponent{
     this.$http.delete(`/api/posts/${posts._id}`);
   }
 
-  toggle(posts){
-    clicked=!clicked;
-  };
+  
   
   toggleEdit(posts){
         posts.edit = !posts.edit;
