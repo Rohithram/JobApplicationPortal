@@ -10,9 +10,18 @@ You can see the list of posts applied by you in customer page.which is shown in 
 You can see status of your application there.
 once the Hiring Managers (admins) do an action on your application ,you will be able to see your status of your application in your customer page whether selected or rejected.
 The selection is done randomly by the admin.
+You can be selected for more than one post also by the admin if required.
+you can get multiple jobs!!!
+Coming to ADMIN side:
+You have to login with the admin account mentioned in the login page.
+You will see HM PORTAL tab in the main page if you log in .
+Inside that tab,
+He can edit and delete and add new posts if wanted and they also mentions max applicants for a particuar posts.
+On clicking any posts by the admin the details of the posts( i.e Applicants who applied for that post) will be displayed at the end of the page in a separate table,each time you select any posts it will show only the details of that post only.
+It shows history of applicants and present applicants to do selection by admins.Whenever applicant is approved or rejected nextime you click that post for checking applications it will show new applicaitons as well as old applications with buttons disabled and showing your recent action of you!.
 
 
-## Getting Started
+## Getting Started 
 
 ### Prerequisites
 
