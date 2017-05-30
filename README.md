@@ -8,6 +8,8 @@ Once logged in you will be able to see apply button and you can apply for any nu
 Even if you apply for the same post many times it will be taken only once in the server.
 You can see the list of posts applied by you in customer page.which is shown in the main tab only when you are logged in.
 You can see status of your application there.
+once the Hiring Managers (admins) do an action on your application ,you will be able to see your status of your application in your customer page whether selected or rejected.
+The selection is done randomly by the admin.
 
 
 ## Getting Started
